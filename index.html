@@ -2,285 +2,254 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koyangi - Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Koyangi Store | รับออกแบบเว็บไซต์และ GoogleSheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Slackey&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Mitr:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --bg-paper: #fff9fb;
-            --main-pink: #ffb7d5;
-            --deep-berry: #632a4a;
-            --soft-purple: #f8c8ff;
-            --accent-gold: #ffd700;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mitr: ['Mitr', 'sans-serif'],
+                        fredoka: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#333333',
+                            DEFAULT: '#000000',
+                            dark: '#000000',
+                            bg: '#ffffff'
+                        }
+                    }
+                }
+            }
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    </script>
+    <style>
         body {
             font-family: 'Mitr', sans-serif;
-            background-color: var(--main-pink);
-            background-image: radial-gradient(#ffffff 15%, transparent 15%);
-            background-size: 20px 20px;
-            color: var(--deep-berry);
-            padding: 15px;
+            background-color: #1a1a1a;
+            -webkit-tap-highlight-color: transparent;
         }
-
-        /* Unique Hand-drawn Container */
-        .canvas {
-            background: var(--bg-paper);
-            max-width: 500px;
-            margin: 0 auto;
-            border: 4px solid var(--deep-berry);
-            border-radius: 40px 15px 40px 15px;
-            box-shadow: 12px 12px 0px var(--deep-berry);
-            overflow: hidden;
-            position: relative;
+        /* Scallop updated to Black Theme */
+        .scallop-top {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23000000' opacity='.25'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-23.82V0Z' fill='%23000000' opacity='.5'/%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%23000000'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center bottom;
+            height: 40px;
+            width: 100%;
         }
-
-        .section { padding: 25px 20px; border-bottom: 4px solid var(--deep-berry); }
-
-        /* Custom Typography */
-        .font-slackey { font-family: 'Slackey', cursive; }
-        .title-stroke {
-            color: white;
-            -webkit-text-stroke: 1.5px var(--deep-berry);
-            text-shadow: 3px 3px 0px var(--main-pink);
-        }
-
-        /* UI: Washi Tape Header */
-        .header {
-            background: #ffecf2;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-        }
-        .washi-tape {
-            position: absolute;
-            top: 10px; right: -20px;
-            background: var(--soft-purple);
-            padding: 5px 40px;
-            transform: rotate(15deg);
-            border: 2px solid var(--deep-berry);
-            font-size: 0.7rem;
-            font-weight: bold;
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
-        }
-
-        .logo-area { margin: 20px 0; }
-        .logo-text { font-size: 3.5rem; line-height: 1; }
+        .modal-scroll::-webkit-scrollbar { width: 6px; }
+        .modal-scroll::-webkit-scrollbar-track { background: #f3f4f6; border-radius: 8px; }
+        .modal-scroll::-webkit-scrollbar-thumb { background: #000000; border-radius: 8px; }
         
-        .intro-cloud {
-            background: white;
-            border: 3px solid var(--deep-berry);
-            border-radius: 20px;
-            padding: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            position: relative;
-            box-shadow: 4px 4px 0px var(--soft-purple);
+        .product-card {
+            transition: all 0.3s ease;
         }
-
-        /* UI: Scallop Buttons */
-        .btn-grid { display: grid; gap: 10px; margin-top: 15px; }
-        .btn-custom {
-            background: white;
-            border: 3px solid var(--deep-berry);
-            padding: 12px;
-            border-radius: 50px;
-            font-family: 'Mitr';
-            font-weight: 600;
-            color: var(--deep-berry);
-            cursor: pointer;
-            box-shadow: 4px 4px 0px var(--deep-berry);
-            transition: 0.2s;
-            text-decoration: none;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .btn-custom:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px var(--deep-berry); }
-
-        /* UI: Memo Pad Style Cards */
-        .card {
-            background: white;
-            border: 3px solid var(--deep-berry);
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -10px; left: 50%; transform: translateX(-50%);
-            width: 40px; height: 15px;
-            background: rgba(255, 215, 0, 0.6); /* Tape effect */
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .img-box {
-            width: 100%; height: 120px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem;
-            border: 2px dashed var(--deep-berry);
-        }
-
-        .price-sticker {
-            background: var(--deep-berry);
-            color: var(--main-pink);
-            padding: 2px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            float: right;
-        }
-
-        .rules-zone {
-            background: #fff0f5;
-            border-radius: 20px;
-            padding: 20px;
-            border: 3px dashed var(--deep-berry);
-        }
-
-        .footer {
-            background: var(--deep-berry);
-            color: white;
-            text-align: center;
-            padding: 25px;
-            font-size: 0.85rem;
-        }
-
-        /* Modal Custom */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(99, 42, 74, 0.7);
-            display: none; justify-content: center; align-items: center;
-            z-index: 100; padding: 20px;
-        }
-        .modal-paper {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            border: 4px solid var(--deep-berry);
-            width: 100%; max-width: 350px;
-            position: relative;
+        .product-card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
-<body>
+<body class="flex justify-center min-h-screen text-gray-800">
 
-    <div class="canvas">
-        <header class="section header">
-            <div class="washi-tape">#OPEN_NOW</div>
-            <button style="background:var(--accent-gold); border:2px solid var(--deep-berry); border-radius:10px; padding:4px 12px; font-weight:700; font-size:0.7rem;">✨ เช็คคิวงานที่นี่ ✨</button>
-            <div style="font-size: 0.7rem; margin-top: 8px; font-weight: 600;">Status: เปิดรับออเดอร์ปกติ 🎀</div>
-            
-            <div class="logo-area">
-                <p class="font-slackey" style="font-size: 0.8rem; letter-spacing: 2px;">👑 ROYAL WELCOME 👑</p>
-                <h1 class="font-slackey logo-text title-stroke">Koyangi</h1>
-            </div>
+    <div class="w-full max-w-[420px] bg-white relative shadow-2xl overflow-x-hidden min-h-screen pb-20">
+        
+        <div class="scallop-top"></div>
 
-            <div class="intro-cloud">
-                ยินดีต้อนรับเข้าสู่ทางร้าน ร้านเรารับทำ GoogleSheet เว็บเรทราคาแอพพรี เว็บเรทราคางานป้าย เว็บเรทราคาเติมเกมส์ ทางร้านยินดีให้บริการลูกค้าทุกท่านค่ะ
-            </div>
-        </header>
+        <div class="px-6 pt-6 relative bg-white">
+            <svg class="absolute right-6 top-2 w-6 h-6 text-black" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.5-6.3-4.8-6.3 4.8 2.3-7.5-6-4.6h7.6z"/>
+            </svg>
 
-        <section class="section">
-            <h2 class="font-slackey title-stroke" style="font-size: 1.5rem; text-align: center;">👑 GALLERIA</h2>
-            <p style="text-align: center; font-size: 0.8rem; margin: 5px 0 15px;">เลือกชมผลงานระดับพรีเมียม</p>
-            <div class="btn-grid">
-                <button class="btn-custom" onclick="openModal('modal-bright')">🎀 งานป้าย & โลโก้</button>
-                <button class="btn-custom" onclick="openModal('modal-dark')">📊 Google Sheet</button>
-                <button class="btn-custom" onclick="openModal('modal-pastel')">🌐 Website Shop</button>
-            </div>
-        </section>
-
-        <section class="section" style="background: #fff;">
-            <h2 class="font-slackey title-stroke" style="font-size: 1.5rem; text-align: center; margin-bottom: 25px;">SERVICES</h2>
-            
-            <div class="card">
-                <span class="price-sticker">สอบถามราคา</span>
-                <div class="img-box" style="background: #fff0f5;">🎨</div>
-                <h3 class="font-slackey" style="font-size: 1.1rem;">Logo & Design</h3>
-                <ul style="list-style: none; font-size: 0.85rem; margin-top: 10px; line-height: 1.6;">
-                    <li>• รับทำป้ายสินค้า / ป้ายบัญชี</li>
-                    <li>• ออกแบบโลโก้ร้านค้า</li>
-                    <li style="color: #d63384; font-weight: bold;">• ดีไซน์เนอร์จัดวางให้ฟรี</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <span class="price-sticker">ราคาเป็นกันเอง</span>
-                <div class="img-box" style="background: #f5f0ff;">📊</div>
-                <h3 class="font-slackey" style="font-size: 1.1rem;">Google Sheet</h3>
-                <ul style="list-style: none; font-size: 0.85rem; margin-top: 10px; line-height: 1.6;">
-                    <li>• ระบบคิวชีต (Queue Sheet)</li>
-                    <li>• บันทึกรายรับ-รายจ่าย</li>
-                    <li style="color: #d63384; font-weight: bold;">• สรุปยอดอัตโนมัติ</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <span class="price-sticker">129.-</span>
-                <div class="img-box" style="background: #f0faff;">🌐</div>
-                <h3 class="font-slackey" style="font-size: 1.1rem;">Website Shop</h3>
-                <ul style="list-style: none; font-size: 0.85rem; margin-top: 10px; line-height: 1.6;">
-                    <li>• เว็บเรทราคาแอปพรีเมียม</li>
-                    <li>• เว็บเรทราคางานป้าย</li>
-                    <li style="color: #d63384; font-weight: bold;">• รองรับมือถือ 100%</li>
-                </ul>
-            </div>
-
-            <div class="rules-zone">
-                <h3 class="font-slackey" style="text-align: center; margin-bottom: 15px;">Royal Terms</h3>
-                <div style="font-size: 0.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <div>
-                        <strong style="text-decoration: underline;">👑 วิธีสั่งงาน</strong>
-                        <p>แจ้งรายละเอียด > ชำระยอด > รอรับงาน</p>
+            <div class="flex items-center gap-5 relative">
+                <div class="w-[110px] h-[110px] bg-gray-100 rounded-2xl flex items-center justify-center relative shadow-sm border border-gray-200">
+                    <img src="logo.png" alt="Logo" class="w-full h-full object-cover rounded-2xl">
+                    <div class="absolute -top-3 -right-4 bg-black text-white text-[9px] font-fredoka px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
+                        <svg class="w-2.5 h-2.5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        STORE
                     </div>
-                    <div>
-                        <strong style="text-decoration: underline;">💖 หมายเหตุ</strong>
-                        <p>งานด่วนมีค่าบริการ / แก้ไขงานได้ตามตกลง</p>
+                </div>
+                <div class="flex flex-col">
+                    <h1 class="font-fredoka text-5xl text-black font-extrabold leading-none tracking-tight">[Koyangi]</h1>
+                    <div class="mt-3">
+                        <span class="bg-black text-white font-fredoka text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest inline-block">Welcome</span>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section class="section" style="text-align: center;">
-            <h2 class="font-slackey title-stroke">GOODNOTE</h2>
-            <div class="card" style="margin-top: 15px; display: inline-block; width: 100%;">
-                <h3 class="font-slackey" style="color: var(--main-pink);">Special iOS</h3>
-                <span class="btn-custom" style="display: inline-block; width: auto; padding: 5px 20px; margin-top: 10px;">20.-</span>
-            </div>
-        </section>
-
-        <section class="section" style="background: var(--soft-purple);">
-            <h2 class="font-slackey title-stroke" style="text-align: center;">CONTACT</h2>
-            <div class="btn-grid" style="margin-top: 20px;">
-                <a href="#" class="btn-custom">Facebook</a>
-                <a href="#" class="btn-custom">Line Official</a>
-            </div>
-        </section>
-
-        <footer class="footer">
-            👑 ขอบคุณที่ไว้วางใจให้ <br>
-            <span class="font-slackey" style="font-size: 1.2rem;">Koyangi</span> ดูแลคุณ 👑
-        </footer>
-    </div>
-
-    <div class="modal" id="modal-bright">
-        <div class="modal-paper">
-            <h3 class="font-slackey">งานป้าย & โลโก้</h3>
-            <p style="margin: 15px 0;">เร็วๆ นี้...</p>
-            <button class="btn-custom" style="width: 100%;" onclick="closeModal('modal-bright')">ปิด</button>
         </div>
+
+        <div class="mt-8 px-6">
+            <h2 class="text-center font-extrabold text-[1.35rem] text-black">ยินดีต้อนรับเข้าสู่ทางร้าน</h2>
+            <div class="bg-gray-50 text-gray-600 text-[12px] text-center px-5 py-6 rounded-[1.5rem] mt-5 shadow-sm border border-gray-100 leading-relaxed relative italic">
+                ยินดีต้อนรับเข้าสู่ทางร้าน ร้านเรารับทำ GoogleSheet เว็บเรทราคาแอพพรี เว็บเรทราคางานป้าย เว็บเรทราคาเติมเกมส์ ทางร้านยินดีให้บริการลูกค้าทุกท่านค่ะ
+            </div>
+        </div>
+
+        <div class="mt-10 px-6">
+            <h3 class="text-center font-fredoka font-bold text-sm tracking-[0.2em] text-black mb-5 uppercase">Product & Services</h3>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="product-card bg-white border-2 border-gray-100 rounded-3xl p-4 flex items-center gap-4 shadow-sm">
+                    <div class="w-20 h-20 bg-gray-200 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-100">
+                        <img src="placeholder-logo.png" alt="Logo Design" class="w-full h-full object-cover opacity-50">
+                        <span class="absolute text-[10px] font-bold text-gray-400">LOGO PLACEHOLDER</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-black text-sm">รับทำป้าย โลโก้ ลายน้ำ</h4>
+                        <p class="text-[11px] text-gray-500 mt-1">ออกแบบโลโก้ธุรกิจ ลายน้ำกันก๊อปปี้ และงานป้ายบัญชีทุกรูปแบบ</p>
+                    </div>
+                </div>
+
+                <div class="product-card bg-white border-2 border-gray-100 rounded-3xl p-4 flex items-center gap-4 shadow-sm">
+                    <div class="w-20 h-20 bg-gray-200 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-100">
+                        <img src="placeholder-sheet.png" alt="Sheet Design" class="w-full h-full object-cover opacity-50">
+                        <span class="absolute text-[10px] font-bold text-gray-400">SHEET PLACEHOLDER</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-black text-sm">GoogleSheet คิวชีต</h4>
+                        <p class="text-[11px] text-gray-500 mt-1">ระบบจัดการคิวงาน รายรับ-รายจ่าย คำนวณอัตโนมัติ ใช้งานง่าย</p>
+                    </div>
+                </div>
+
+                <div class="product-card bg-black rounded-3xl p-4 flex items-center gap-4 shadow-xl">
+                    <div class="w-20 h-20 bg-gray-800 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden border border-gray-700">
+                        <img src="placeholder-web.png" alt="Web Design" class="w-full h-full object-cover opacity-50">
+                        <span class="absolute text-[10px] font-bold text-gray-500 text-center px-1">WEB PLACEHOLDER</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">Website Design</h4>
+                        <p class="text-[11px] text-gray-400 mt-1">เว็บเรทราคาแอพพรี, เว็บเรทราคางานป้าย, เว็บเรทราคาเติมเกมส์</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-8 mt-10 mb-8 flex items-center gap-4">
+            <div class="h-px bg-gray-200 flex-1"></div>
+            <h3 class="font-fredoka font-bold text-sm tracking-[0.2em] text-black">PRICING</h3>
+            <div class="h-px bg-gray-200 flex-1"></div>
+        </div>
+
+        <div class="px-6">
+            <div class="bg-black rounded-[2rem] p-6 text-white relative overflow-hidden shadow-md">
+                <svg class="absolute -right-4 -bottom-4 w-32 h-32 text-white opacity-10" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+                
+                <div class="text-[13px] font-medium opacity-90 uppercase">Starting at</div>
+                <div class="text-5xl font-bold font-mitr flex items-baseline gap-2 mt-1">
+                    129.- <span class="text-[11px] font-mitr opacity-70 font-medium">(ไม่เกิน 200 lines)</span>
+                </div>
+            </div>
+
+            <div class="mt-3 flex flex-col gap-3">
+                <div class="flex justify-between items-center bg-white border border-gray-200 p-4 rounded-2xl shadow-sm text-sm">
+                    <span class="font-medium text-gray-700">เกิน 200 lines</span>
+                    <span class="font-bold text-black font-mitr text-lg">139.-</span>
+                </div>
+                <div class="flex justify-between items-center bg-white border border-gray-200 p-4 rounded-2xl shadow-sm text-sm">
+                    <span class="font-medium text-gray-700">GoogleSheet (เริ่มต้น)</span>
+                    <span class="font-bold text-black font-mitr text-lg">เริ่มต้น 159.-</span>
+                </div>
+            </div>
+
+            <div class="mt-4 border-2 border-dashed border-gray-300 bg-gray-50 rounded-3xl p-5 text-sm shadow-sm relative">
+                <div class="flex items-center gap-2 mb-3">
+                    <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.89 1.113l-3.411.114a.75.75 0 01-.808-.808l.114-3.411a4.5 4.5 0 011.113-1.89l13.43-13.43z" />
+                    </svg>
+                    <span class="font-bold text-black">การแก้ไขงาน & Add-on</span>
+                </div>
+                <ul class="text-gray-500 space-y-2 text-[13px] list-disc pl-4 marker:text-black">
+                    <li>แก้ไขฟรี 1 ครั้ง (หลังจากนั้นจุดละ 10-20 บาท)</li>
+                    <li>งานเร่ง (4 ชม.) คิด x2 จากราคาปกติ</li>
+                    <li>ออกแบบใหม่ (ไม่ใช้เทมเพลต) +200.-</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-12 px-6">
+            <div class="flex items-center gap-3 mb-6">
+                <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <h3 class="font-fredoka font-bold text-base tracking-wider text-black">HOW TO ORDER</h3>
+            </div>
+            
+            <div class="relative border-l-2 border-black ml-3 space-y-6 pb-2">
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-black font-bold font-fredoka text-xs">1</div>
+                    <h4 class="font-bold text-black font-fredoka uppercase text-[13px]">Step 1: Details</h4>
+                    <p class="text-[12px] text-gray-500 mt-1">ส่งข้อมูลร้านค้าและรูปแบบที่ต้องการ</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-black font-bold font-fredoka text-xs">2</div>
+                    <h4 class="font-bold text-black font-fredoka uppercase text-[13px]">Step 2: Payment</h4>
+                    <p class="text-[12px] text-gray-500 mt-1">ชำระเงินเพื่อเริ่มคิวงาน</p>
+                </div>
+                <div class="relative pl-8">
+                    <div class="absolute -left-[17px] top-0 w-8 h-8 rounded-full border-2 border-black bg-white flex items-center justify-center text-black font-bold font-fredoka text-xs">3</div>
+                    <h4 class="font-bold text-black font-fredoka uppercase text-[13px]">Step 3: Done</h4>
+                    <p class="text-[12px] text-gray-500 mt-1">รอรับลิงก์งาน (รองาน 4-8 ชม.)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-10 mx-6 bg-gray-50 rounded-[2rem] p-6 shadow-sm border border-gray-100">
+            <h3 class="font-fredoka font-bold text-[15px] tracking-wider text-black mb-4">DETAILS SHOP</h3>
+            <ul class="text-[12px] text-gray-600 space-y-3 list-disc pl-4 marker:text-black">
+                <li>รองาน 4–8 ชั่วโมง แล้วแต่คิวของวันนั้นๆ</li>
+                <li>งดจิกงดเร่งทุกกรณี แม่ค้ามีงานประจำ</li>
+                <li>โอนเงินแล้วไม่คืนเงินทุกกรณี</li>
+            </ul>
+        </div>
+
+        <div class="mt-12 mx-6 border-t-2 border-gray-100 pt-8 pb-10">
+            <div class="flex flex-col items-center mb-8">
+                <div class="w-[120px] h-[120px] bg-gray-100 rounded-3xl flex items-center justify-center relative shadow-sm border border-gray-200">
+                    <img src="scan.png" alt="Scan QR" class="w-full h-full object-cover rounded-3xl relative z-10">
+                </div>
+                <div class="mt-4 text-center">
+                    <div class="font-fredoka font-bold text-[11px] text-black tracking-wider">LINE OFFICIAL</div>
+                    <div class="font-fredoka font-bold text-black text-lg">@KOYANGI</div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
     <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(!modal) return;
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(!modal) return;
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+            document.body.style.overflow = '';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('fixed')) {
+                closeModal(event.target.id);
+            }
+        }
     </script>
 </body>
 </html>
