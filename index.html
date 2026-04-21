@@ -65,7 +65,6 @@
             background-size: 20px 20px;
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -73,7 +72,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             z-index: 50;
             overflow-y: auto;
         }
@@ -82,13 +81,6 @@
             justify-content: center;
             align-items: flex-start;
             padding: 2rem 1rem;
-        }
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .modal-content::-webkit-scrollbar-thumb {
-            background: #000;
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -136,26 +128,6 @@
             </div>
         </section>
 
-        <div class="flex flex-col items-center gap-12 mb-20">
-            <div class="w-full max-w-lg sketch-border p-8 bg-white text-center">
-                <h3 class="font-fredoka font-bold text-2xl mb-6 uppercase border-b-2 border-black pb-2">Pricing</h3>
-                <div class="bg-black text-white py-6 mb-6">
-                    <p class="text-4xl md:text-6xl font-black font-mitr">129.-</p>
-                    <p class="text-xs opacity-60 mt-1">Starting Price (200 lines)</p>
-                </div>
-                <div class="space-y-3 text-left">
-                    <div class="flex justify-between font-bold text-sm">
-                        <span>Extra Lines (>200)</span>
-                        <span>139.-</span>
-                    </div>
-                    <div class="flex justify-between font-bold text-sm">
-                        <span>GoogleSheet (Start)</span>
-                        <span>159.-</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <footer class="text-center pt-12 border-t-4 border-black">
             <div class="w-40 h-40 sketch-border mx-auto mb-6 bg-white p-3">
                 <img src="scan.png" alt="LINE QR" class="w-full h-full object-cover grayscale">
@@ -166,47 +138,72 @@
     </main>
 
     <div id="graphicModal" class="modal">
-        <div class="modal-content w-full max-w-2xl sketch-border bg-white p-8 relative my-auto">
-            <button onclick="closeModal()" class="absolute top-4 right-4 font-black text-2xl">✕</button>
+        <div class="modal-content w-full max-w-2xl sketch-border bg-white p-6 md:p-8 relative my-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 font-black text-2xl hover:scale-110 transition-transform">✕</button>
             
-            <h2 class="font-fredoka font-black text-3xl mb-6 border-b-4 border-black pb-2">GRAPHIC DESIGN</h2>
+            <h2 class="font-fredoka font-black text-3xl mb-8 border-b-4 border-black pb-2">GRAPHIC DESIGN</h2>
             
-            <div class="space-y-8 text-sm leading-relaxed">
-                <div>
-                    <h3 class="font-black text-lg bg-black text-white inline-block px-2 mb-3">How to สั่งงาน</h3>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li>เลือกงานที่ต้องการจะทำส่งให้ทางร้านเพื่อสอบถามราคางานและรายละเอียด</li>
-                        <li>เลือก สี / ตูน / ของตกแต่ง / บล็อก / ฟอนต์ ที่ต้องการจะใช้ ถ้าไม่ต้องการใช้ ตูน / ของตกแต่ง / บล็อก แจ้งทางร้านด้วยนะคะ</li>
-                        <li class="italic font-bold text-red-600">(ลูกค้าที่เลือกฟอนต์สามารถแจ้งได้ว่าเอาฟอนต์ไหนเป็นหัวข้อ ฟอนต์ไหนเป็นเนื้อหา หากลูกค้าไม่เลือกฟอนต์ทางร้านจะเลือกให้ แต่ลูกค้าจะไม่สามารถขอแก้ฟอนต์ที่ทางร้านเลือกให้)</li>
-                        <li>เลือกของตกแต่งแล้วไม่สามารถเปลี่ยนใหม่ได้ (เลือกของตกแต่งเป็นเซ็ทๆเท่านั้น ไม่เอามายำรวม)</li>
-                        <li>อยากได้ป้ายโทนสีไหนให้ส่งมาเฉดสีโดยการแนปรูปมาให้ทางร้าน ถ้าแจ้งแค่ ชมพู แดง เหลือง ส้ม ไม่สามารถแก้โทนสีทีหลังได้</li>
-                        <li class="font-bold underline">รายละเอียดใช้การ ”พิมพ์“ เท่านั้นนะคะ ตรวจสอบรายละเอียดก่อนส่งให้ทางร้าน</li>
+            <div class="space-y-10 text-sm leading-relaxed">
+                
+                <div class="space-y-4">
+                    <h3 class="font-black text-lg bg-black text-white inline-block px-3 py-1 uppercase tracking-wider">How to สั่งงาน</h3>
+                    <ul class="space-y-3">
+                        <li class="flex gap-2"><span>•</span> <span>เลือกงานที่ต้องการจะทำส่งให้ทางร้านเพื่อสอบถามราคางานและรายละเอียด</span></li>
+                        <li class="flex gap-2"><span>•</span> <span>เลือก สี / ตูน / ของตกแต่ง / บล็อก / ฟอนต์ ที่ต้องการจะใช้ (หากไม่ต้องการใช้อะไรให้แจ้งทันที)</span></li>
+                        <li class="bg-gray-100 p-3 border-l-4 border-black italic">
+                            <span class="font-bold text-red-600 block mb-1">เรื่องฟอนต์:</span> 
+                            แจ้งได้ว่าเอาฟอนต์ไหนเป็นหัวข้อ/เนื้อหา หากไม่เลือกทางร้านจะเลือกให้ (ไม่สามารถขอแก้ฟอนต์ที่ร้านเลือกให้ได้)
+                        </li>
+                        <li class="flex gap-2"><span>•</span> <span>เลือกของตกแต่งแล้วไม่สามารถเปลี่ยนใหม่ได้ (เลือกเป็นเซ็ทๆ เท่านั้น ไม่เอามายำรวม)</span></li>
+                        <li class="flex gap-2 font-bold"><span>•</span> <span>โทนสี: ต้องส่งเฉดสีเป็นรูปภาพมาเท่านั้น หากแจ้งแค่ชื่อสี (เช่น ชมพู, แดง) จะไม่สามารถขอแก้โทนสีภายหลังได้</span></li>
+                        <li class="flex gap-2 font-black underline decoration-2"><span>•</span> <span>รายละเอียด: ใช้การ ”พิมพ์“ เท่านั้น ตรวจสอบความถูกต้องก่อนส่ง</span></li>
                     </ul>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="sketch-border-sm p-4">
-                        <h3 class="font-black border-b-2 border-black mb-2">เรทราคางาน</h3>
-                        <p><strong>งานลายน้ำ:</strong> เริ่มต้น 29.-<br>- ใช้บล็อก (29.-) / ใช้ตัวตูน (39.-)</p>
-                        <p class="mt-2"><strong>งานป้าย:</strong> เริ่มต้น 39.-<br>- ไม่ใช้บล็อก (39.-) / ใช้ตัวตูน (39.-) / ใช้บล็อก (59.-)</p>
-                        <p class="mt-2"><strong>โลโก้:</strong> เริ่มต้น 39.-</p>
-                    </div>
-                    <div class="sketch-border-sm p-4 bg-gray-50">
-                        <h3 class="font-black border-b-2 border-black mb-2 italic">Rush Work Price</h3>
-                        <p><strong>งานเร่ง:</strong> x2 ของราคางานปกติ</p>
-                        <p class="text-[10px] mt-2 leading-tight">ขึ้นอยู่กับจำนวนงานและคิว เร่ง 1 ครั้ง ต่อ 1 คิว ต่อ 1 งาน หากไม่ได้จ่ายค่าเร่ง งดเร่ง งดวีน</p>
+                <div class="space-y-4">
+                    <h3 class="font-black text-lg bg-black text-white inline-block px-3 py-1 uppercase tracking-wider">เรทราคางาน</h3>
+                    <div class="grid gap-2">
+                        <div class="border-2 border-black">
+                            <div class="bg-black text-white px-3 py-1 font-bold text-xs">งานลายน้ำ (เริ่มต้น 29.-)</div>
+                            <div class="p-3 grid grid-cols-2 gap-4">
+                                <div class="flex justify-between"><span>- ใช้บล็อก</span> <span class="font-bold">29 Baht</span></div>
+                                <div class="flex justify-between border-l-2 border-black pl-4"><span>- ใช้ตัวตูน</span> <span class="font-bold">39 Baht</span></div>
+                            </div>
+                        </div>
+                        <div class="border-2 border-black">
+                            <div class="bg-black text-white px-3 py-1 font-bold text-xs">งานป้าย (เริ่มต้น 39.-)</div>
+                            <div class="p-3 space-y-2">
+                                <div class="flex justify-between"><span>- ไม่ใช้บล็อก / ใช้ตัวตูน</span> <span class="font-bold">39 Baht</span></div>
+                                <div class="flex justify-between border-t border-black border-dashed pt-2"><span>- ใช้บล็อก</span> <span class="font-bold">59 Baht</span></div>
+                            </div>
+                        </div>
+                        <div class="border-2 border-black flex justify-between items-center p-3">
+                            <span class="font-bold uppercase">โลโก้</span>
+                            <span class="font-black text-lg">เริ่มต้น 39 Baht</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-black text-white p-4">
-                    <h3 class="font-black border-b border-white mb-2 uppercase">การแก้งาน</h3>
-                    <p>แก้งานได้จนกว่าจะพอใจ (ในขอบเขตการบรีฟครั้งแรก)</p>
-                    <p class="mt-2 text-xs opacity-80">ส่งงานแล้วไม่สามารถแก้ย้อนหลังได้ การแก้งานไม่รวมการเปลี่ยนบรีฟ/ของตกแต่ง/ตัวตูน/บล็อก ที่เลือกไว้แต่แรก หากต้องการแก้หลังส่งงานแล้ว คิดจุดละ 10.-</p>
+                <div class="sketch-border-sm p-4 bg-gray-50 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-black text-white text-[10px] px-2 font-bold">URGENT</div>
+                    <h3 class="font-black text-lg mb-2 italic">Rush Work Price</h3>
+                    <p class="font-bold">ราคาเร่ง = x2 ของราคางานปกติ</p>
+                    <p class="text-[11px] mt-2 leading-tight opacity-70">เร่งได้ 1 ครั้ง ต่อ 1 คิว ต่อ 1 งาน (ขึ้นอยู่กับจำนวนคิวขณะนั้น) หากไม่ได้จ่ายค่าเร่ง งดเร่ง งดวีน</p>
                 </div>
 
-                <div class="text-center pt-4">
-                    <a href="https://drive.google.com/drive/folders/1MzigyMzY0B_QnFz4dzk29Ppyk55xvfPE" target="_blank" class="sketch-border-sm bg-black text-white px-6 py-3 font-bold hover:bg-gray-800 inline-block transition-transform hover:scale-105">
-                        ดูตัวอย่างผลงานที่นี่ ➜
+                <div class="bg-black text-white p-5 border-l-[12px] border-white outline outline-2 outline-black">
+                    <h3 class="font-black text-lg mb-3 underline">การแก้งาน</h3>
+                    <ul class="space-y-2 text-xs">
+                        <li>• แก้ได้จนกว่าจะพอใจ (ต้องอยู่ในขอบเขตบรีฟครั้งแรก)</li>
+                        <li>• <span class="text-yellow-400 font-bold">สำคัญ:</span> ส่งงานแล้วไม่สามารถแก้ย้อนหลังได้</li>
+                        <li>• ไม่สามารถเปลี่ยน บรีฟ/ของตกแต่ง/ตัวตูน/บล็อก ที่เลือกไว้แต่แรก</li>
+                        <li>• หากส่งงานแล้วต้องการแก้ภายหลัง <span class="underline">คิดจุดละ 10฿</span></li>
+                    </ul>
+                </div>
+
+                <div class="text-center pt-2 pb-6">
+                    <a href="https://drive.google.com/drive/folders/1MzigyMzY0B_QnFz4dzk29Ppyk55xvfPE" target="_blank" class="sketch-border-sm bg-black text-white px-8 py-4 font-black hover:bg-white hover:text-black transition-all active:translate-y-1 active:shadow-none inline-block">
+                        VIEW PORTFOLIO ➜
                     </a>
                 </div>
             </div>
@@ -226,12 +223,9 @@
             document.getElementById('graphicModal').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
-        // Close on background click
         window.onclick = function(event) {
             let modal = document.getElementById('graphicModal');
-            if (event.target == modal) {
-                closeModal();
-            }
+            if (event.target == modal) closeModal();
         }
     </script>
 </body>
