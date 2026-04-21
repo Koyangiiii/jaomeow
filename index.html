@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Koyangi Store | Organized Line Art</title>
+    <title>Koyangi Store | Graphic Design Popup</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,17 +18,6 @@
                         fredoka: ['Fredoka', 'sans-serif'],
                     },
                 }
-            }
-        }
-
-        function togglePopup() {
-            const popup = document.getElementById('graphic-popup');
-            if (popup.classList.contains('hidden')) {
-                popup.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            } else {
-                popup.classList.add('hidden');
-                document.body.style.overflow = 'auto';
             }
         }
     </script>
@@ -50,26 +39,56 @@
             box-shadow: 4px 4px 0px 0px #000000;
         }
 
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 1.5rem;
+            padding: 1rem;
+            scroll-snap-type: x mandatory;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .horizontal-scroll {
+                justify-content: flex-start;
+            }
+        }
+        
+        .scroll-item {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
+            cursor: pointer;
+        }
+
         .checkerboard {
             background-image: conic-gradient(#000 90deg, #fff 90deg 180deg, #000 180deg 270deg, #fff 270deg);
             background-size: 20px 20px;
         }
 
-        /* Popup Styles */
-        .popup-overlay {
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(4px);
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 50;
+            overflow-y: auto;
         }
-
-        .custom-scrollbar::-webkit-scrollbar {
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+        }
+        .modal-content::-webkit-scrollbar {
             width: 8px;
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
+        .modal-content::-webkit-scrollbar-thumb {
             background: #000;
-            border-radius: 10px;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -77,155 +96,143 @@
 
     <div class="w-full h-6 checkerboard border-b-4 border-black"></div>
 
-    <div id="graphic-popup" class="fixed inset-0 z-50 hidden popup-overlay flex items-center justify-center p-4">
-        <div class="bg-white sketch-border w-full max-w-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
-            <button onclick="togglePopup()" class="absolute top-4 right-4 bg-black text-white w-10 h-10 flex items-center justify-center font-black text-xl hover:bg-gray-800">X</button>
-            
-            <div class="p-8">
-                <h2 class="font-fredoka text-3xl font-black border-b-4 border-black pb-2 mb-6 uppercase">Graphic Design Details</h2>
-                
-                <div class="mb-8">
-                    <h3 class="bg-black text-white inline-block px-4 py-1 font-bold mb-4">How to สั่งงาน</h3>
-                    <ul class="list-disc pl-5 space-y-2 text-sm leading-relaxed">
-                        <li>เลือกงานที่ต้องการจะทำส่งให้ทางร้านเพื่อสอบถามราคางานและรายละเอียด</li>
-                        <li>เลือก <b>สี / ตูน / ของตกแต่ง / บล็อก</b> ที่ต้องการจะใช้ ถ้าไม่ต้องการใช้ ตูน / ของตกแต่ง / บล็อก แจ้งทางร้านด้วยนะคะ</li>
-                        <li>เลือกของตกแต่งแล้วไม่สามารถเปลี่ยนใหม่ได้ <b>(เลือกของตกแต่งเป็นเซ็ทๆเท่านั้น ไม่เอามายำรวม)</b></li>
-                        <li>อยากได้ป้ายโทนสีไหนให้ส่งมาเฉดสีโดยการแนปรูปมาให้ทางร้าน ถ้าแจ้งแค่ ชมพู แดง เหลือง ส้ม ไม่สามารถแก้โทนสีทีหลังได้</li>
-                        <li>รายละเอียดใช้การ <b>”พิมพ์“</b> เท่านั้นนะคะ ตรวจสอบรายละเอียดก่อนส่งให้ทางร้าน</li>
-                    </ul>
-                </div>
-
-                <div class="mb-8 grid md:grid-cols-2 gap-6">
-                    <div class="border-2 border-black p-4">
-                        <h3 class="font-bold border-b-2 border-black mb-3">เรทราคางาน</h3>
-                        <div class="space-y-3 text-sm">
-                            <div>
-                                <p class="font-bold underline">งานลายน้ำ เริ่มที่ 29.-</p>
-                                <p>- ใช้บล็อก เริ่มที่ 29.-</p>
-                                <p>- ใช้ตัวตูน เริ่มที่ 39.-</p>
-                            </div>
-                            <div>
-                                <p class="font-bold underline">งานป้าย เริ่มที่ 39.-</p>
-                                <p>- ไม่ใช้บล็อก เริ่มที่ 39.-</p>
-                                <p>- ใช้ตัวตูน เริ่มที่ 39.-</p>
-                                <p>- ใช้บล็อก เริ่มที่ 59.-</p>
-                            </div>
-                            <p class="font-bold">โลโก้ เริ่มต้นที่ 39.-</p>
-                        </div>
-                    </div>
-                    <div class="border-2 border-black p-4 bg-gray-50">
-                        <h3 class="font-bold border-b-2 border-black mb-2">Rush Work Price</h3>
-                        <p class="text-xs leading-relaxed">งานเร่ง <b>x2 ของราคางานป้าย</b> ขึ้นอยู่กับจำนวนงานและคิวที่ต้องการจะเร่ง (เร่ง 1 ครั้ง ต่อ 1 คิว ต่อ 1 งาน) หากไม่ได้จ่ายค่าเร่ง งดเร่ง งดวีน</p>
-                    </div>
-                </div>
-
-                <div class="mb-8 p-4 bg-black text-white">
-                    <h3 class="font-bold mb-2 uppercase text-sm underline">การแก้งาน</h3>
-                    <p class="text-xs leading-relaxed">
-                        สามารถแก้งานได้จนกว่าจะพอใจ แต่ต้องอยู่ในขอบเขตการบรีฟงานครั้งแรก หากส่งงานแล้วไม่สามารถแก้รอบย้อนหลังได้ <br><br>
-                        <b>การแก้งาน = ไม่สามารถเปลี่ยนบรีฟ/ของตกแต่ง/ตัวตูน/บล็อก</b> ที่เลือกไว้แต่แรก ขอความร่วมมือเช็คงานให้ละเอียดก่อนแจ้งรับงาน หากแก้หลังจากส่งงานแล้ว <b>คิดค่าแก้จุดละ 10฿</b>
-                    </p>
-                </div>
-
-                <a href="https://drive.google.com/drive/folders/1MzigyMzY0B_QnFz4dzk29Ppyk55xvfPE" target="_blank" class="block text-center bg-black text-white py-4 font-black hover:bg-gray-800 transition-colors sketch-border-sm">
-                    VIEW PORTFOLIO (ตัวอย่างงาน)
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <main class="max-w-4xl mx-auto px-6 py-12">
+    <main class="max-w-5xl mx-auto px-6 py-12">
         
-        <header class="flex flex-row items-center gap-6 mb-12 border-4 border-black p-6 bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <div class="w-24 h-24 md:w-28 md:h-28 bg-white border-4 border-black shrink-0 overflow-hidden">
+        <header class="flex flex-row items-center gap-8 mb-16 border-b-4 border-black pb-8">
+            <div class="w-24 h-24 md:w-32 md:h-32 bg-white sketch-border shrink-0 overflow-hidden">
                 <img src="logo.png" alt="Logo" class="w-full h-full object-cover">
             </div>
-            <div class="flex flex-col justify-center">
-                <h1 class="font-fredoka text-4xl md:text-6xl font-black leading-none uppercase tracking-tighter">KOYANGI<br>STORE</h1>
-                <div class="inline-block bg-black text-white px-3 py-0.5 font-fredoka text-[10px] mt-2 w-fit tracking-widest">DESIGN STUDIO 2026</div>
+            <div class="text-left">
+                <h1 class="font-fredoka text-4xl md:text-7xl font-black leading-none uppercase tracking-tighter">KOYANGI<br>STORE</h1>
+                <div class="inline-block bg-black text-white px-3 py-0.5 font-fredoka text-xs mt-2">DESIGN STUDIO</div>
             </div>
         </header>
 
-        <section class="mb-16 text-center">
-            <div class="max-w-2xl mx-auto sketch-border bg-white p-6 relative">
-                <div class="absolute -top-3 -left-3 bg-black text-white text-xs px-2 py-1 font-bold">INFO</div>
-                <p class="text-lg font-medium italic leading-relaxed">
-                    "ยินดีต้อนรับเข้าสู่ทางร้าน ร้านเรารับทำ GoogleSheet เว็บเรทราคาแอพพรี เว็บเรทราคางานป้าย เว็บเรทราคาเติมเกมส์ ยินดีให้บริการค่ะ"
-                </p>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <button onclick="togglePopup()" class="sketch-border-sm p-5 bg-white flex flex-col items-center text-center hover:bg-gray-50 transition-colors group">
-                <div class="w-10 h-10 bg-black text-white flex items-center justify-center font-black mb-3 group-hover:scale-110 transition-transform">01</div>
-                <h4 class="font-bold text-lg mb-2">Graphic Design</h4>
-                <p class="text-xs text-gray-600">รับทำป้าย โลโก้ ลายน้ำ และงานป้ายบัญชีทุกรูปแบบ</p>
-                <span class="mt-4 text-[10px] font-black underline uppercase">คลิกดูรายละเอียด</span>
-            </button>
-
-            <div class="sketch-border-sm p-5 bg-white flex flex-col items-center text-center">
-                <div class="w-10 h-10 bg-black text-white flex items-center justify-center font-black mb-3">02</div>
-                <h4 class="font-bold text-lg mb-2">GoogleSheet</h4>
-                <p class="text-xs text-gray-600">ระบบจัดการคิวงาน รายรับ-รายจ่าย คำนวณอัตโนมัติ</p>
-            </div>
-            <div class="sketch-border-sm p-5 bg-black text-white flex flex-col items-center text-center">
-                <div class="w-10 h-10 bg-white text-black flex items-center justify-center font-black mb-3">03</div>
-                <h4 class="font-bold text-lg mb-2">Web Design</h4>
-                <p class="text-xs text-gray-400">เว็บเรทราคาแอพพรี, งานป้าย, หรือเว็บเติมเกมส์</p>
-            </div>
-        </section>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div class="sketch-border p-6 bg-white flex flex-col h-full text-center">
-                <h3 class="font-fredoka font-bold text-xl mb-4 uppercase border-b-4 border-black pb-2">Pricing</h3>
-                <div class="bg-black text-white p-4 mb-4">
-                    <p class="text-xs opacity-70 uppercase tracking-widest">Starting at</p>
-                    <p class="text-5xl font-black font-mitr">129.-</p>
+        <section class="mb-20">
+            <h3 class="font-fredoka font-bold text-3xl mb-10 uppercase text-center">Our Services</h3>
+            <div class="horizontal-scroll">
+                <div class="scroll-item" onclick="openModal()">
+                    <div class="sketch-border-sm p-6 bg-white h-full text-center hover:bg-gray-50 transition-colors">
+                        <div class="font-black text-3xl mb-3">#01</div>
+                        <h4 class="font-bold text-xl mb-2 underline decoration-4">Graphic Design</h4>
+                        <p class="text-sm text-gray-600">รับทำป้าย โลโก้ ลายน้ำ และงานป้ายบัญชีทุกรูปแบบ</p>
+                        <span class="inline-block mt-4 text-[10px] bg-black text-white px-2">CLICK TO VIEW</span>
+                    </div>
                 </div>
-                <ul class="space-y-3 text-sm font-bold text-left">
-                    <li class="flex justify-between border-b-2 border-dotted border-black pb-1">
+                <div class="scroll-item">
+                    <div class="sketch-border-sm p-6 bg-white h-full text-center">
+                        <div class="font-black text-3xl mb-3">#02</div>
+                        <h4 class="font-bold text-xl mb-2">GoogleSheet</h4>
+                        <p class="text-sm text-gray-600">ระบบจัดการคิวงาน รายรับ-รายจ่าย คำนวณอัตโนมัติ</p>
+                    </div>
+                </div>
+                <div class="scroll-item">
+                    <div class="sketch-border-sm p-6 bg-black text-white h-full text-center">
+                        <div class="font-black text-3xl mb-3 text-white">#03</div>
+                        <h4 class="font-bold text-xl mb-2">Web Design</h4>
+                        <p class="text-sm text-gray-400">เว็บเรทราคาแอพพรี, งานป้าย, หรือเว็บเติมเกมส์</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="flex flex-col items-center gap-12 mb-20">
+            <div class="w-full max-w-lg sketch-border p-8 bg-white text-center">
+                <h3 class="font-fredoka font-bold text-2xl mb-6 uppercase border-b-2 border-black pb-2">Pricing</h3>
+                <div class="bg-black text-white py-6 mb-6">
+                    <p class="text-4xl md:text-6xl font-black font-mitr">129.-</p>
+                    <p class="text-xs opacity-60 mt-1">Starting Price (200 lines)</p>
+                </div>
+                <div class="space-y-3 text-left">
+                    <div class="flex justify-between font-bold text-sm">
                         <span>Extra Lines (>200)</span>
                         <span>139.-</span>
-                    </li>
-                    <li class="flex justify-between border-b-2 border-dotted border-black pb-1">
+                    </div>
+                    <div class="flex justify-between font-bold text-sm">
                         <span>GoogleSheet (Start)</span>
                         <span>159.-</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="sketch-border p-6 bg-white flex flex-col h-full text-center">
-                <h3 class="font-fredoka font-bold text-xl mb-4 uppercase border-b-4 border-black pb-2">Steps</h3>
-                <div class="space-y-6">
-                    <div>
-                        <div class="font-black text-lg underline">STEP 1</div>
-                        <p class="text-sm">แจ้งข้อมูลและรูปแบบที่ต้องการ</p>
-                    </div>
-                    <div>
-                        <div class="font-black text-lg underline">STEP 2</div>
-                        <p class="text-sm">ชำระเงินเพื่อยืนยันคิวงาน</p>
-                    </div>
-                    <div>
-                        <div class="font-black text-lg underline">STEP 3</div>
-                        <p class="text-sm">รอรับงานภายใน 4-8 ชม.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer class="flex flex-col items-center text-center pt-8 border-t-4 border-black">
-            <div class="w-32 h-32 sketch-border bg-white p-2 mb-4">
+        <footer class="text-center pt-12 border-t-4 border-black">
+            <div class="w-40 h-40 sketch-border mx-auto mb-6 bg-white p-3">
                 <img src="scan.png" alt="LINE QR" class="w-full h-full object-cover grayscale">
             </div>
-            <p class="font-fredoka font-bold text-sm tracking-[0.3em] uppercase opacity-60">Add Line</p>
-            <h4 class="font-fredoka font-black text-3xl uppercase tracking-tighter">@KOYANGI</h4>
+            <p class="font-fredoka font-bold text-sm tracking-widest">LINE OFFICIAL</p>
+            <h4 class="font-fredoka font-black text-4xl uppercase">@KOYANGI</h4>
         </footer>
-
     </main>
 
-    <div class="w-full h-10 checkerboard border-t-4 border-black mt-12 flex items-center justify-center">
-        <span class="bg-white px-6 py-1 font-black text-[10px] uppercase border-x-4 border-black tracking-widest">Koyangi Studio 2026</span>
+    <div id="graphicModal" class="modal">
+        <div class="modal-content w-full max-w-2xl sketch-border bg-white p-8 relative my-auto">
+            <button onclick="closeModal()" class="absolute top-4 right-4 font-black text-2xl">✕</button>
+            
+            <h2 class="font-fredoka font-black text-3xl mb-6 border-b-4 border-black pb-2">GRAPHIC DESIGN</h2>
+            
+            <div class="space-y-8 text-sm leading-relaxed">
+                <div>
+                    <h3 class="font-black text-lg bg-black text-white inline-block px-2 mb-3">How to สั่งงาน</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>เลือกงานที่ต้องการจะทำส่งให้ทางร้านเพื่อสอบถามราคางานและรายละเอียด</li>
+                        <li>เลือก สี / ตูน / ของตกแต่ง / บล็อก / ฟอนต์ ที่ต้องการจะใช้ ถ้าไม่ต้องการใช้ ตูน / ของตกแต่ง / บล็อก แจ้งทางร้านด้วยนะคะ</li>
+                        <li class="italic font-bold text-red-600">(ลูกค้าที่เลือกฟอนต์สามารถแจ้งได้ว่าเอาฟอนต์ไหนเป็นหัวข้อ ฟอนต์ไหนเป็นเนื้อหา หากลูกค้าไม่เลือกฟอนต์ทางร้านจะเลือกให้ แต่ลูกค้าจะไม่สามารถขอแก้ฟอนต์ที่ทางร้านเลือกให้)</li>
+                        <li>เลือกของตกแต่งแล้วไม่สามารถเปลี่ยนใหม่ได้ (เลือกของตกแต่งเป็นเซ็ทๆเท่านั้น ไม่เอามายำรวม)</li>
+                        <li>อยากได้ป้ายโทนสีไหนให้ส่งมาเฉดสีโดยการแนปรูปมาให้ทางร้าน ถ้าแจ้งแค่ ชมพู แดง เหลือง ส้ม ไม่สามารถแก้โทนสีทีหลังได้</li>
+                        <li class="font-bold underline">รายละเอียดใช้การ ”พิมพ์“ เท่านั้นนะคะ ตรวจสอบรายละเอียดก่อนส่งให้ทางร้าน</li>
+                    </ul>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="sketch-border-sm p-4">
+                        <h3 class="font-black border-b-2 border-black mb-2">เรทราคางาน</h3>
+                        <p><strong>งานลายน้ำ:</strong> เริ่มต้น 29.-<br>- ใช้บล็อก (29.-) / ใช้ตัวตูน (39.-)</p>
+                        <p class="mt-2"><strong>งานป้าย:</strong> เริ่มต้น 39.-<br>- ไม่ใช้บล็อก (39.-) / ใช้ตัวตูน (39.-) / ใช้บล็อก (59.-)</p>
+                        <p class="mt-2"><strong>โลโก้:</strong> เริ่มต้น 39.-</p>
+                    </div>
+                    <div class="sketch-border-sm p-4 bg-gray-50">
+                        <h3 class="font-black border-b-2 border-black mb-2 italic">Rush Work Price</h3>
+                        <p><strong>งานเร่ง:</strong> x2 ของราคางานปกติ</p>
+                        <p class="text-[10px] mt-2 leading-tight">ขึ้นอยู่กับจำนวนงานและคิว เร่ง 1 ครั้ง ต่อ 1 คิว ต่อ 1 งาน หากไม่ได้จ่ายค่าเร่ง งดเร่ง งดวีน</p>
+                    </div>
+                </div>
+
+                <div class="bg-black text-white p-4">
+                    <h3 class="font-black border-b border-white mb-2 uppercase">การแก้งาน</h3>
+                    <p>แก้งานได้จนกว่าจะพอใจ (ในขอบเขตการบรีฟครั้งแรก)</p>
+                    <p class="mt-2 text-xs opacity-80">ส่งงานแล้วไม่สามารถแก้ย้อนหลังได้ การแก้งานไม่รวมการเปลี่ยนบรีฟ/ของตกแต่ง/ตัวตูน/บล็อก ที่เลือกไว้แต่แรก หากต้องการแก้หลังส่งงานแล้ว คิดจุดละ 10.-</p>
+                </div>
+
+                <div class="text-center pt-4">
+                    <a href="https://drive.google.com/drive/folders/1MzigyMzY0B_QnFz4dzk29Ppyk55xvfPE" target="_blank" class="sketch-border-sm bg-black text-white px-6 py-3 font-bold hover:bg-gray-800 inline-block transition-transform hover:scale-105">
+                        ดูตัวอย่างผลงานที่นี่ ➜
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="w-full h-10 checkerboard border-t-4 border-black mt-12 flex items-center justify-center">
+        <span class="bg-white px-6 py-1 font-black text-[10px] uppercase border-x-2 border-black tracking-widest">Koyangi Studio 2026</span>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('graphicModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('graphicModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        // Close on background click
+        window.onclick = function(event) {
+            let modal = document.getElementById('graphicModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
